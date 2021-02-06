@@ -3229,25 +3229,31 @@ var fillTable = function fillTable(_ref2) {
       elem.innerHTML = html;
     });
   } else if (member !== 'all' && allEvents.length) {
-    var userEvent = users.find(function (_ref4) {
-      var name = _ref4.name;
+    allEvents.forEach(function (_ref4) {
+      var day = _ref4.day,
+          time = _ref4.time;
+      var el = table.querySelector("[data-time=\"".concat(time, "\"]")).querySelector("[data-day=\"".concat(day, "\"]"));
+      el.classList.add('color');
+    });
+    var userEvent = users.find(function (_ref5) {
+      var name = _ref5.name;
       return name === member;
     });
-    userEvent.events.forEach(function (_ref5) {
-      var title = _ref5.title,
-          day = _ref5.day,
-          time = _ref5.time;
+    userEvent.events.forEach(function (_ref6) {
+      var title = _ref6.title,
+          day = _ref6.day,
+          time = _ref6.time;
       var elem = table.querySelector("[data-time=\"".concat(time, "\"]")).querySelector("[data-day=\"".concat(day, "\"]"));
       elem.classList.add('color');
       elem.innerHTML = "<div class=\"div-fill-table unselectable\" title=\"".concat(title, "\" data-time=\"").concat(time, "\" data-day=\"").concat(day, "\"><h5>").concat(title, "</h5></div><button class=\"btn btn-light btn-sm div-fill-table-close\">X</button>");
     });
   }
 };
-var saveLocalStorage = function saveLocalStorage(_ref6) {
-  var users = _ref6.users,
-      days = _ref6.days,
-      hours = _ref6.hours,
-      allEvents = _ref6.allEvents;
+var saveLocalStorage = function saveLocalStorage(_ref7) {
+  var users = _ref7.users,
+      days = _ref7.days,
+      hours = _ref7.hours,
+      allEvents = _ref7.allEvents;
   localStorage.setItem('dataCalUsers', JSON.stringify(users));
   localStorage.setItem('dataCalDays', JSON.stringify(days));
   localStorage.setItem('dataCalHours', JSON.stringify(hours));
